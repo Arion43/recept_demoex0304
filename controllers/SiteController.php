@@ -77,6 +77,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            Yii::$app->session->setFlash('info', 'Вы успешно авторизовались!');
             return $this->goBack();
         }
 
@@ -133,7 +134,9 @@ class SiteController extends Controller
                 $model->auth_key = Yii::$app->security->generateRandomString();
                 $model->password = Yii::$app->security->generatePasswordHash($model->password);
                 if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались');
+                    Yii::$app->user->login($model, 24 * 3600);
+                    Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались!');
+                    Yii::$app->session->setFlash('info', 'Вы успешно авторизовались!');
                     return $this->goHome();       
                 }
 

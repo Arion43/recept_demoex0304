@@ -9,13 +9,13 @@ use yii\bootstrap5\ActiveForm;
 ?>
 <div class="site-register">
 
-    <h2>Реистрация</h2>
+    <h2>Регистрация</h2>
 
     <?php $form = ActiveForm::begin(); ?>
 
 
         <?= $form->field($model, 'login') ?>
-        <?= $form->field($model, 'password') ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
         <?= $form->field($model, 'full_name') ?>
         <?= $form->field($model, 'phone') ?>
         <?= $form->field($model, 'email') ?>

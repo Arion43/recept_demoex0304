@@ -115,14 +115,14 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Application::class, ['user_id' => 'id']);
     }
 
-    // public function findByUsername()
-    // {
+    public static function findByUsername(string $login)
+    {
+        return static::findOne(['login' => $login]) ?? false;
+    }
 
-    // }
-
-    // public static function 
-    // {
-
-    // }
+    public function validatePassword(string $password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
 
 }
